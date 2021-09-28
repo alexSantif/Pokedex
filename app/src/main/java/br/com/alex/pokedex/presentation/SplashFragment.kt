@@ -1,6 +1,7 @@
 package br.com.alex.pokedex.presentation
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,9 +26,17 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<Button>(R.id.button_test_mine).setOnClickListener {
-            featureRouter.start(requireContext(), OpenHomeAction)
-        }
+        setCountDown()
+    }
+
+    private fun setCountDown() {
+        object : CountDownTimer(3000, 1000) {
+            override fun onTick(p0: Long) {}
+
+            override fun onFinish() {
+                featureRouter.start(requireContext(), OpenHomeAction)
+            }
+        }.start()
     }
 
     companion object {

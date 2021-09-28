@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name="br.com.alex.pokedex.home.HomeActivity"
+            android:name="br.com.alex.pokedex.home.presentation.HomeActivity"
             android:exported="false"
             android:screenOrientation="portrait">
             <intent-filter>
