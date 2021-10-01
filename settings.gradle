@@ -10,3 +10,5 @@ rootProject.name = "Pokedex"
 include ':app'
 include ':home'
 include ':router'
+include ':mypokedex'
+include ':mypokemons'

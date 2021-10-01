@@ -1,5 +1,6 @@
 package br.com.alex.router
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +12,7 @@ typealias IntentParams = Bundle.() -> Unit
 
 interface FeatureRouter {
     fun start(
-        context: Context,
+        activity: Activity,
         action: Action,
         vararg flags: Int,
         args: IntentParams = {}
@@ -20,12 +21,15 @@ interface FeatureRouter {
 
 internal class StandardFeatureRouter(private val actionRule: ActionRule) : FeatureRouter {
 
-    override fun start(context: Context, action: Action, vararg flags: Int, args: IntentParams) {
+    override fun start(activity: Activity, action: Action, vararg flags: Int, args: IntentParams) {
         if (actionRule.shouldAllowNavigation(action)) {
-            val intent = createIntent(context, action, flags, args)
-            context.startActivity(intent)
+            activity.run {
+                val intent = createIntent(this, action, flags, args)
+                startActivityForResult(intent, 123)
+            }
+
         } else {
-            actionRule.onNotAllowedNavigation(context, action)
+            actionRule.onNotAllowedNavigation(activity, action)
         }
     }
 
@@ -35,7 +39,6 @@ internal class StandardFeatureRouter(private val actionRule: ActionRule) : Featu
         flags: IntArray? = null,
         args: IntentParams = {}
     ) = Intent(action.name)
-        .putExtras(Bundle().apply(args))
         .setPackage(context.packageName)
         .apply {
             flags?.forEach { addFlags(it) }

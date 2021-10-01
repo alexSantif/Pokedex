@@ -34,7 +34,7 @@ class SplashFragment : Fragment() {
             override fun onTick(p0: Long) {}
 
             override fun onFinish() {
-                featureRouter.start(requireContext(), OpenHomeAction)
+                featureRouter.start(requireActivity(), OpenHomeAction)
             }
         }.start()
     }

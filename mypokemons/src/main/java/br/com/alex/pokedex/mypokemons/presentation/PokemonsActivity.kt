@@ -1,16 +1,16 @@
-package br.com.alex.pokedex.home.presentation
+package br.com.alex.pokedex.mypokemons.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.com.alex.pokedex.home.R
+import br.com.alex.pokedex.mypokemons.R
 
-class HomeActivity : AppCompatActivity() {
+class PokemonsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_pokemons)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.home_container, HomeFragment.newInstance())
+            .replace(R.id.pokemons_container, PokemonsFragment.newInstance())
             .setReorderingAllowed(true)
             .addToBackStack("home")
             .commit()
